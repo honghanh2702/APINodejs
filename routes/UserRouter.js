@@ -5,9 +5,9 @@ router.use(express.json());
 const jwt = require("jsonwebtoken");
 const pool = require("../config/database");
 const secretKey = "my_secret_key";
-//Router login
-router.use(bodyParser.json());
 
+router.use(bodyParser.json());
+//Router login
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
   const payload = { email };
@@ -27,7 +27,7 @@ router.post("/login", (req, res) => {
     }
   );
 });
-
+//Router register
 router.post("/register", (req, res) => {
   const { id, name, email, password } = req.body;
 
@@ -50,7 +50,7 @@ router.post("/register", (req, res) => {
     }
   });
 });
-
+//Router listUser
 router.get("/listUser", (req,res) => {
   pool.query("SELECT * FROM users", (error, results) => {
     if (error) throw error;
@@ -58,7 +58,7 @@ router.get("/listUser", (req,res) => {
     res.json(results);
   });
 });
-
+//Router listUserno Password
 router.get("/listUsernoPassword", (req, res) => {
   pool.query(
     "SELECT id,name,email,create_at,update_at FROM users",
@@ -69,6 +69,7 @@ router.get("/listUsernoPassword", (req, res) => {
     }
   );
 });
+// Router Logout
 router.post("/logout", (req, res) => {
   global.accessToken = null;
   res.send("Đã đăng xuất");
