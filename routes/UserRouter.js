@@ -51,7 +51,7 @@ router.post("/register", (req, res) => {
   });
 });
 
-router.get("/listUser", (res) => {
+router.get("/listUser", (req,res) => {
   pool.query("SELECT * FROM users", (error, results) => {
     if (error) throw error;
 
